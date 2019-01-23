@@ -1,0 +1,8 @@
+<mat-nav-list>
+    <ng-container *ngIf="(contacts$ | async) as contacts; else noContacts">
+        <app-contact-list-item *ngFor="let contact of contacts" [contact]="contact" (click)="onClick(contact)"></app-contact-list-item>
+    </ng-container>
+    <ng-template #noContacts>
+        There are no contacts
+    </ng-template>
+</mat-nav-list>

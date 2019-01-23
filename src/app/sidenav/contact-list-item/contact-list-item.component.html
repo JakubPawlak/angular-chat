@@ -1,0 +1,7 @@
+<mat-list-item>
+    <img [src]="contact.avatar || fallbackImg" alt="{{contact.name}} {{contact.surname}}" matListAvatar/>
+    <h3 matLine> {{contact.name}} {{contact.surname}}</h3>
+    <p matLine>
+        <span> {{contact.avatar}} </span>
+    </p>
+</mat-list-item>

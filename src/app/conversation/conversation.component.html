@@ -1,0 +1,7 @@
+<mat-list class="conversation">
+  <mat-list-item *ngFor="let event of elements; index as i" [dir]="i % 2 ? 'rtl' : 'ltr'">
+    <img matListAvatar [src]="event.author.avatar || fallbackImg" [alt]="event.author.surname"/>
+    <app-message [messageBubble]="event" class="conversation-message"></app-message>
+  </mat-list-item>
+</mat-list>
+
