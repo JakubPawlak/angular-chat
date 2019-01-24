@@ -9,7 +9,7 @@
     </mat-list>
 </div>
 <mat-form-field appearance="fill" class="w-100">
-    <input matInput placeholder="Wpisz nową wiadomość" type="text" [(ngModel)]="message"/>
+    <input matInput placeholder="Wpisz nową wiadomość" type="text" [(ngModel)]="message" (keyup.enter)="onSubmit(message)"/>
     <mat-icon type="submit" matSuffix (click)="onSubmit(message)">send</mat-icon>
 </mat-form-field>
 
