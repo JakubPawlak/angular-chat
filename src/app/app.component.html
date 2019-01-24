@@ -1,14 +1,15 @@
 <div class="page">
+    <mat-toolbar class="mat-toolbar">
+        <button [hidden]="!mobileQuery.matches" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+        <h1>Chat</h1>
+    </mat-toolbar>
     <mat-sidenav-container class="mat-drawer-container">
-        <mat-sidenav [fixedInViewport]="mobileQuery.matches"
+        <mat-sidenav #sidenav [fixedInViewport]="mobileQuery.matches"
                      [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" class="mat-sidenav"
-                     disableClose="true" mode="side">
+                     disableClose="true" mode="side" fixedTopGap="56">
             <app-sidenav (contactChosen)="selectContact($event.id)"></app-sidenav>
         </mat-sidenav>
         <mat-sidenav-content class="mat-app-background mat-drawer-content">
-            <mat-toolbar class="mat-toolbar">
-                <span>My Application</span>
-            </mat-toolbar>
             <app-conversation [messageBubbles]="(currentConversation$ | async)?.conversation"
                               class="app-conversation" (sendMessage)="onSendMessage($event)"></app-conversation>
         </mat-sidenav-content>
