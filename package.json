@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "mock:contacts": "json-server --watch mocks/contacts.js"
+    "mock:contacts": "json-server mocks/contacts.js"
   },
   "private": true,
   "dependencies": {
