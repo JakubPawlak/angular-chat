@@ -29,15 +29,14 @@
 
 .app-conversation {
   flex: 1;
-  position: relative;
-  .mat-list-base {
+  display: flex;
+  flex-direction: column;
+  .conversation {
+    flex: 1;
     overflow: auto;
+  }
+  .mat-list-base {
     height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
   }
   .mat-list-base .mat-list-item.mat-list-item-with-avatar {
     height: auto;
@@ -68,6 +67,9 @@
     .mat-card-subtitle {
       margin-bottom: 8px;
     }
+  }
+  .mat-icon {
+    cursor: pointer;
   }
 }
 

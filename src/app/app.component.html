@@ -1,4 +1,3 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="page">
     <mat-sidenav-container class="mat-drawer-container">
         <mat-sidenav [fixedInViewport]="mobileQuery.matches"
@@ -11,11 +10,7 @@
                 <span>My Application</span>
             </mat-toolbar>
             <app-conversation [messageBubbles]="(currentConversation$ | async)?.conversation"
-                              class="app-conversation"></app-conversation>
-            <mat-form-field appearance="fill" class="w-100">
-                <input matInput placeholder="Wpisz nową wiadomość" type="text"/>
-                <mat-icon matSuffix>send</mat-icon>
-            </mat-form-field>
+                              class="app-conversation" (sendMessage)="onSendMessage($event)"></app-conversation>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>

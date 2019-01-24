@@ -16,7 +16,6 @@ function generateContacts () {
         };
         contacts.push(user);
 
-        const usersId = [id, 99999];
         conversations.push(
             generateConversation(user)
         )
@@ -35,14 +34,14 @@ function generateConversation(contact) {
         } else {
             author = {id: 99999};
         }
-        const messages = generateMessages(Math.random() * 2, author);
 
         conversation.push(generateMessages(Math.random() * 2, author));
     }
 
     const usersId = [contact.id, 99999];
+    const randomId = Math.ceil(Math.random()*100000);
 
-    return {"conversation": conversation, "usersId": usersId};
+    return {"conversation": conversation, "usersId": usersId, "id": randomId};
 }
 
 function generateMessages (quant, author) {

@@ -1,34 +1,30 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { IContact } from './shared/interfaces/contact.interface';
-import { IMessage } from './shared/interfaces/message.interface';
 import { MessagingService } from './services/messaging.service';
 import { Observable } from 'rxjs';
 import { IConversation } from './shared/interfaces/conversation.interface';
-import { ContactsService } from './services/contacts.service';
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
     mobileQuery: MediaQueryList;
     currentConversation$: Observable<IConversation> = null;
-    currentContact$: Observable<IContact> = null;
+    currentConversationId = 0;
+    currentConversation;
 
     private _mobileQueryListener: () => void;
 
     constructor(
-        changeDetectorRef: ChangeDetectorRef,
-        media: MediaMatcher,
-        private messagingService: MessagingService,
-        private contactsService: ContactsService
+        private changeDetectorRef: ChangeDetectorRef,
+        private media: MediaMatcher,
+        private messagingService: MessagingService
     ) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
-        // this.mobileQuery.onchange();
+        this.selectContact(0);
     }
 
     ngOnDestroy(): void {
@@ -36,14 +32,23 @@ export class AppComponent {
     }
 
     selectContact(contactId: number): void {
-        console.dir(contactId);
         this.getConversation(contactId);
     }
 
     getConversation(contactId: number): void {
         this.currentConversation$ = this.messagingService.getConversation(contactId);
-        this.currentConversation$.subscribe(res => {});
+        this.currentConversation$.subscribe(res => {
+            console.dir(res);
+            this.currentConversation = res;
+            this.currentConversationId = res.id;
+        });
     }
 
-    sendMessage(contactId: number, body: string) {}
+    onSendMessage(body: string) {
+        this.currentConversation$ = this.messagingService.sendMessage(
+            this.currentConversationId,
+            body,
+            this.currentConversation
+        );
+    }
 }

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IMessage } from '../../shared/interfaces/message.interface';
 import { IMessageBubble } from '../../shared/interfaces/message-bubble.interface';
 
 @Component({

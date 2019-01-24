@@ -1,14 +1,20 @@
-<mat-list *ngIf="messageBubbles; else noConversation" class="conversation" cdkScrollable>
-    <mat-list-item *ngFor="let messageBubble of messageBubbles"
-                   [class.user]="messageBubble.author.id == userId"
-                   [dir]="messageBubble.author.id == userId ? 'rtl' : 'ltr'">
-        <img [alt]="messageBubble.author.surname" [src]="messageBubble.author.avatar || fallbackImg" matListAvatar/>
-        <app-message [messageBubble]="messageBubble" class="conversation-message"></app-message>
-    </mat-list-item>
-</mat-list>
+<div class="conversation">
+    <mat-list *ngIf="messageBubbles; else noConversation">
+        <mat-list-item *ngFor="let messageBubble of messageBubbles"
+                       [class.user]="messageBubble.author.id == userId"
+                       [dir]="messageBubble.author.id == userId ? 'rtl' : 'ltr'">
+            <img [alt]="messageBubble.author.surname" [src]="messageBubble.author.avatar || fallbackImg" matListAvatar/>
+            <app-message [messageBubble]="messageBubble" class="conversation-message"></app-message>
+        </mat-list-item>
+    </mat-list>
+</div>
+<mat-form-field appearance="fill" class="w-100">
+    <input matInput placeholder="Wpisz nową wiadomość" type="text" [(ngModel)]="message"/>
+    <mat-icon type="submit" matSuffix (click)="onSubmit(message)">send</mat-icon>
+</mat-form-field>
 
 <ng-template #noConversation>
     <mat-label class="display-1">
-        Brak wiadomości
+        Wybierz czat
     </mat-label>
 </ng-template>
