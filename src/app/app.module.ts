@@ -8,18 +8,21 @@ import { SidenavModule } from './sidenav/sidenav.module';
 import { ContactsService } from './services/contacts.service';
 import { MaterialModule } from './shared/material/material.module';
 import { ConversationModule } from './conversation/conversation.module';
+import { HttpClientModule } from '@angular/common/http';
+import { MessagingService } from './services/messaging.service';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         MaterialModule,
         SidenavModule,
         ConversationModule
     ],
-    providers: [ContactsService],
+    providers: [ContactsService, MessagingService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

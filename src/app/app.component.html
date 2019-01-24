@@ -4,15 +4,16 @@
         <mat-sidenav [fixedInViewport]="mobileQuery.matches"
                      [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" class="mat-sidenav"
                      disableClose="true" mode="side">
-            <app-sidenav></app-sidenav>
+            <app-sidenav (contactChosen)="selectContact($event.id)"></app-sidenav>
         </mat-sidenav>
         <mat-sidenav-content class="mat-app-background mat-drawer-content">
             <mat-toolbar class="mat-toolbar">
                 <span>My Application</span>
             </mat-toolbar>
-            <app-conversation class="app-conversation"></app-conversation>
+            <app-conversation [messageBubbles]="(currentConversation$ | async)?.conversation"
+                              class="app-conversation"></app-conversation>
             <mat-form-field appearance="fill" class="w-100">
-                <input matInput type="text" placeholder="Wpisz nową wiadomość"/>
+                <input matInput placeholder="Wpisz nową wiadomość" type="text"/>
                 <mat-icon matSuffix>send</mat-icon>
             </mat-form-field>
         </mat-sidenav-content>

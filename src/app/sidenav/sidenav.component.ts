@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ContactsService } from '../services/contacts.service';
 import { IContact } from '../shared/interfaces/contact.interface';
@@ -9,6 +9,7 @@ import { IContact } from '../shared/interfaces/contact.interface';
 })
 export class SidenavComponent implements OnInit {
     contacts$: Observable<IContact[]>;
+    @Output() contactChosen: EventEmitter<IContact> = new EventEmitter();
 
     constructor(public contactsService: ContactsService) {
         this.contacts$ = this.contactsService.getContacts();
@@ -18,5 +19,6 @@ export class SidenavComponent implements OnInit {
 
     onClick(contact: IContact) {
         console.dir(contact);
+        this.contactChosen.emit(contact);
     }
 }

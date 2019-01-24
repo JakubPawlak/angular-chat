@@ -1,31 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IContact } from '../shared/interfaces/contact.interface';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ContactsService {
     contacts: IContact[];
+    baseUrl = environment.baseUrl;
 
-    constructor() {
-        this.contacts = [
-            {
-                id: 0,
-                name: 'Jan',
-                surname: 'Kowalski',
-                avatar:
-                    'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-            },
-            {
-                id: 1,
-                name: 'Jan',
-                surname: 'Kowalski'
-            }
-        ];
-    }
+    constructor(private http: HttpClient) {}
 
     getContacts(): Observable<IContact[]> {
-        return of(this.contacts);
+        const url = `${this.baseUrl}/contacts`;
+
+        return this.http.get<IContact[]>(url);
+    }
+
+    getContact(contactId: number): Observable<IContact> {
+        const url = `${this.baseUrl}/contacts/${contactId}`;
+
+        return this.http.get<IContact>(url);
     }
 }

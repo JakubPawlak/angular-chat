@@ -1,7 +1,14 @@
-<mat-list class="conversation">
-  <mat-list-item *ngFor="let event of elements; index as i" [dir]="i % 2 ? 'rtl' : 'ltr'">
-    <img matListAvatar [src]="event.author.avatar || fallbackImg" [alt]="event.author.surname"/>
-    <app-message [messageBubble]="event" class="conversation-message"></app-message>
-  </mat-list-item>
+<mat-list *ngIf="messageBubbles; else noConversation" class="conversation" cdkScrollable>
+    <mat-list-item *ngFor="let messageBubble of messageBubbles"
+                   [class.user]="messageBubble.author.id == userId"
+                   [dir]="messageBubble.author.id == userId ? 'rtl' : 'ltr'">
+        <img [alt]="messageBubble.author.surname" [src]="messageBubble.author.avatar || fallbackImg" matListAvatar/>
+        <app-message [messageBubble]="messageBubble" class="conversation-message"></app-message>
+    </mat-list-item>
 </mat-list>
 
+<ng-template #noConversation>
+    <mat-label class="display-1">
+        Brak wiadomości
+    </mat-label>
+</ng-template>

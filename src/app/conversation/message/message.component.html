@@ -1,15 +1,12 @@
-<!--<p *ngFor="let message of messages">-->
-  <!--{{message}}-->
-<!--</p>-->
 <ng-container *ngIf="messageBubble">
-
     <mat-card *ngFor="let message of messageBubble.messages; let i = index" class="mat-card mat-card-flat message-card" dir="ltr">
-        <div *ngIf="i === 0" class="mat-card-header">
-                {{messageBubble.author.name}} {{messageBubble.author.surname}}
-                {{messageBubble.timestamp | date}}
-        </div>
-        <div class="mat-card-content">
-            {{message.body}} {{i}}
-        </div>
+        <mat-card-header *ngIf="i === 0" class="mat-card-header mat-body-strong">
+                <mat-card-subtitle>{{messageBubble.author.name}} {{messageBubble.author.surname}}
+            <span class="mat-small"> {{message.timestamp | date:'dd.MM HH:mm'}}</span>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="mat-card-content">
+            {{message.body}}
+        </mat-card-content>
     </mat-card>
 </ng-container>
